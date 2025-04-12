@@ -19,8 +19,8 @@ logger.info("🚀 Starting pubsub-to-kafka service")
 
 try:
     # GCP Pub/Sub setup
-    project_id = "csye7125-dev-449823"
-    subscription_id = "gcs-subscription"
+    project_id = os.getenv("PROJECT_ID")
+    subscription_id = os.getenv("SUBSCRIPTION_ID")
 
     # Initialize the Pub/Sub subscriber client
     logger.info(f"Initializing Pub/Sub client for project {project_id}")
@@ -30,11 +30,12 @@ try:
 
     # Kafka setup
     logger.info("Initializing Kafka producer")
+    bootstrap_servers = os.getenv("KAFKA_BOOTSTRAP_SERVERS")
     producer = KafkaProducer(
-        bootstrap_servers=["kafka:9092"],
+        bootstrap_servers=[bootstrap_servers],
         value_serializer=lambda v: json.dumps(v).encode("utf-8")
     )
-    kafka_topic = "gcs-topic"
+    kafka_topic = os.getenv("KAFKA_TOPIC")
     logger.info(f"Kafka producer initialized, will send to topic: {kafka_topic}")
 
 
