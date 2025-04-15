@@ -5,7 +5,7 @@ pipeline {
     }
 
     environment {
-        IMAGE_NAME = "saimanasg/trace-db"
+        IMAGE_NAME = "saimanasg/trace-pubsub"
         DOCKER_CREDENTIALS_ID = "CloudJenkinsDockerHubPAT"
         TAG = "${env.VERSION}"
         GIT_LOCAL_BRANCH = 'main'
